@@ -1,0 +1,45 @@
+{
+  "description": "Retrieval + answer evaluation set for the synthetic corpus in evaluation/corpus.py. `evidence` is a substring that must appear in a retrieved chunk for it to count as relevant; `page` is the expected page of that evidence. Unanswerable questions must be refused.",
+  "questions": [
+    {"id": "hr-01", "category": "factual", "question": "How many days per week can Aurora employees work remotely?", "doc": "aurora_employee_handbook.txt", "page": 1, "evidence": "up to three days per week", "answer_keywords": ["three"]},
+    {"id": "hr-02", "category": "factual", "question": "What are the core collaboration hours?", "doc": "aurora_employee_handbook.txt", "page": 1, "evidence": "10:00 to 15:00", "answer_keywords": ["10:00", "15:00"]},
+    {"id": "hr-03", "category": "factual", "question": "How many days of paid annual leave do full-time employees get?", "doc": "aurora_employee_handbook.txt", "page": 1, "evidence": "26 days of paid annual leave", "answer_keywords": ["26"]},
+    {"id": "hr-04", "category": "factual", "question": "How long is parental leave at Aurora Robotics?", "doc": "aurora_employee_handbook.txt", "page": 2, "evidence": "18 weeks of fully paid", "answer_keywords": ["18"]},
+    {"id": "hr-05", "category": "keyword", "question": "What is the daily limit for meal expenses at Aurora Robotics?", "doc": "aurora_employee_handbook.txt", "page": 2, "evidence": "45 euros per day", "answer_keywords": ["45"]},
+    {"id": "hr-06", "category": "keyword", "question": "Through which portal are expense claims submitted?", "doc": "aurora_employee_handbook.txt", "page": 2, "evidence": "Ledgerly portal", "answer_keywords": ["Ledgerly"]},
+    {"id": "hr-07", "category": "factual", "question": "Within how many hours must Aurora employees report security incidents?", "doc": "aurora_employee_handbook.txt", "page": 3, "evidence": "within four hours", "answer_keywords": ["four"]},
+    {"id": "hr-08", "category": "paraphrase", "question": "Can I spend some weeks working from abroad?", "doc": "aurora_employee_handbook.txt", "page": 1, "evidence": "Working from another country", "answer_keywords": ["20"]},
+    {"id": "hr-09", "category": "paraphrase", "question": "What happens to vacation days I don't use?", "doc": "aurora_employee_handbook.txt", "page": 1, "evidence": "carried over", "answer_keywords": ["five", "31 March"]},
+    {"id": "hr-10", "category": "paraphrase", "question": "When does my screen lock if I leave my computer?", "doc": "aurora_employee_handbook.txt", "page": 3, "evidence": "lock automatically after five minutes", "answer_keywords": ["five minutes"]},
+
+    {"id": "fx-01", "category": "factual", "question": "How long did the Helios-7 prototype sustain plasma confinement?", "doc": "helios7_phase2_report.pdf", "page": 1, "evidence": "4.2 seconds", "answer_keywords": ["4.2"]},
+    {"id": "fx-02", "category": "factual", "question": "What peak energy gain factor did Helios-7 reach?", "doc": "helios7_phase2_report.pdf", "page": 1, "evidence": "0.73", "answer_keywords": ["0.73"]},
+    {"id": "fx-03", "category": "keyword", "question": "What material are the Helios-7 superconducting magnets made of?", "doc": "helios7_phase2_report.pdf", "page": 2, "evidence": "REBCO tape", "answer_keywords": ["REBCO"]},
+    {"id": "fx-04", "category": "paraphrase", "question": "How hot does the blanket coolant get at the outlet?", "doc": "helios7_phase2_report.pdf", "page": 2, "evidence": "520 degrees Celsius", "answer_keywords": ["520"]},
+    {"id": "fx-05", "category": "factual", "question": "What caused the unplanned shutdowns of the reactor?", "doc": "helios7_phase2_report.pdf", "page": 3, "evidence": "quench in magnet coil C3", "answer_keywords": ["quench"]},
+    {"id": "fx-06", "category": "factual", "question": "How much did Phase II cost?", "doc": "helios7_phase2_report.pdf", "page": 3, "evidence": "48.5 million euros", "answer_keywords": ["48.5"]},
+    {"id": "fx-07", "category": "keyword", "question": "How many plasma discharges were performed in the campaign?", "doc": "helios7_phase2_report.pdf", "page": 1, "evidence": "312 plasma discharges", "answer_keywords": ["312"]},
+    {"id": "fx-08", "category": "paraphrase", "question": "Was anyone hurt during the test campaign?", "doc": "helios7_phase2_report.pdf", "page": 3, "evidence": "No personnel were injured", "answer_keywords": ["No"]},
+
+    {"id": "ct-01", "category": "factual", "question": "What is the monthly service fee under the Meridian agreement?", "doc": "meridian_master_services_agreement.docx", "page": 1, "evidence": "18,400 euros", "answer_keywords": ["18,400"]},
+    {"id": "ct-02", "category": "factual", "question": "What platform availability does the provider guarantee?", "doc": "meridian_master_services_agreement.docx", "page": 2, "evidence": "99.5 percent", "answer_keywords": ["99.5"]},
+    {"id": "ct-03", "category": "factual", "question": "How much notice is required to terminate the Meridian agreement for convenience?", "doc": "meridian_master_services_agreement.docx", "page": 2, "evidence": "90 days written notice", "answer_keywords": ["90"]},
+    {"id": "ct-04", "category": "keyword", "question": "Which country's law governs the agreement?", "doc": "meridian_master_services_agreement.docx", "page": 3, "evidence": "laws of the Netherlands", "answer_keywords": ["Netherlands"]},
+    {"id": "ct-05", "category": "factual", "question": "What is the liability cap in the contract?", "doc": "meridian_master_services_agreement.docx", "page": 3, "evidence": "limited to the fees paid in the 12 months", "answer_keywords": ["12 months"]},
+    {"id": "ct-06", "category": "paraphrase", "question": "What happens if Meridian pays an invoice late?", "doc": "meridian_master_services_agreement.docx", "page": 1, "evidence": "Late payments accrue interest", "answer_keywords": ["8"]},
+    {"id": "ct-07", "category": "factual", "question": "How long do confidentiality obligations last after termination?", "doc": "meridian_master_services_agreement.docx", "page": 3, "evidence": "survive for five years", "answer_keywords": ["five years"]},
+    {"id": "ct-08", "category": "paraphrase", "question": "What compensation does the client get if the platform is down too often?", "doc": "meridian_master_services_agreement.docx", "page": 2, "evidence": "service credit of 5 percent", "answer_keywords": ["5 percent"]}
+  ],
+  "unanswerable": [
+    {"id": "na-01", "question": "What is the salary of the Aurora Robotics CEO?"},
+    {"id": "na-02", "question": "When will the Helios-7 Phase III campaign start?"},
+    {"id": "na-03", "question": "What is the current share price of Meridian Logistics?"},
+    {"id": "na-04", "question": "Who won the 2022 FIFA World Cup?"},
+    {"id": "na-05", "question": "What is the capital of France?"},
+    {"id": "na-06", "question": "How many employees does Northwind Analytics have?"},
+    {"id": "na-07", "question": "What dental insurance coverage do employees receive?"},
+    {"id": "na-08", "question": "Write a short poem about the ocean."},
+    {"id": "na-09", "question": "What is the boiling point of mercury?"},
+    {"id": "na-10", "question": "Which programming language is the Northwind platform written in?"}
+  ]
+}

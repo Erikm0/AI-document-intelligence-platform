@@ -1,0 +1,104 @@
+{
+  "config": {
+    "embedder": "hashing-512",
+    "reranker": "lexical-coverage",
+    "llm": "fake-extractive",
+    "min_relevance": 0.35,
+    "questions": 26,
+    "unanswerable": 10
+  },
+  "retrieval": {
+    "semantic": {
+      "recall@1": 0.8461538461538461,
+      "recall@3": 0.9615384615384616,
+      "recall@5": 1.0,
+      "MRR": 0.9051282051282052,
+      "nDCG@5": 0.928796627476056,
+      "page_acc": 1.0,
+      "latency_ms": 2.1428769239439416
+    },
+    "lexical (BM25)": {
+      "recall@1": 0.8076923076923077,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "MRR": 0.8974358974358976,
+      "nDCG@5": 0.9239891928571473,
+      "page_acc": 1.0,
+      "latency_ms": 1.4917192210514958
+    },
+    "hybrid (RRF)": {
+      "recall@1": 0.8846153846153846,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "MRR": 0.935897435897436,
+      "nDCG@5": 0.9523792118131891,
+      "page_acc": 1.0,
+      "latency_ms": 2.0247961287028513
+    },
+    "hybrid + rerank": {
+      "recall@1": 0.9230769230769231,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "MRR": 0.9615384615384616,
+      "nDCG@5": 0.9716099810439582,
+      "page_acc": 1.0,
+      "latency_ms": 3.4346038636823115
+    }
+  },
+  "answers": {
+    "answer_rate (answerable)": 0.6923076923076923,
+    "citation_accuracy (answered)": 1.0,
+    "keyword_accuracy (answered)": 0.9444444444444444,
+    "mean_grounding_score": 0.9835388888888887,
+    "refusal_rate (unanswerable)": 1.0,
+    "hallucination_rate (unanswerable)": 0.0
+  },
+  "failures": [
+    {
+      "id": "hr-05",
+      "kind": "false_refusal",
+      "detail": "model_insufficient_evidence"
+    },
+    {
+      "id": "hr-08",
+      "kind": "false_refusal",
+      "detail": "low_retrieval_relevance"
+    },
+    {
+      "id": "hr-09",
+      "kind": "false_refusal",
+      "detail": "low_retrieval_relevance"
+    },
+    {
+      "id": "hr-10",
+      "kind": "false_refusal",
+      "detail": "low_retrieval_relevance"
+    },
+    {
+      "id": "fx-05",
+      "kind": "false_refusal",
+      "detail": "model_insufficient_evidence"
+    },
+    {
+      "id": "fx-08",
+      "kind": "false_refusal",
+      "detail": "low_retrieval_relevance"
+    },
+    {
+      "id": "ct-06",
+      "kind": "false_refusal",
+      "detail": "model_insufficient_evidence"
+    },
+    {
+      "id": "ct-08",
+      "kind": "false_refusal",
+      "detail": "low_retrieval_relevance"
+    }
+  ],
+  "ingestion": {
+    "documents": 4,
+    "pages": 11,
+    "chunks": 19,
+    "ingest_seconds": 1.01
+  }
+}

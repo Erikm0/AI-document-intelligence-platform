@@ -1,0 +1,21 @@
+Borealis Labs Contractor Guide
+==============================
+
+Working Arrangements
+
+Contractors at Borealis Labs may work remotely five days per week, but they must attend the quarterly planning week on site in Tromso.
+
+Contractor meal expenses are reimbursed up to 30 euros per day when travelling on behalf of Borealis Labs.
+
+Security for Contractors
+
+Contractors must report security incidents to the Borealis service desk within 24 hours. Personal devices may not be used for Borealis work.
+Invoicing and Termination
+
+Contractors invoice Borealis Labs monthly and invoices are paid within 45 days. Borealis Labs does not pay late payment interest to contractors.
+
+Either Borealis Labs or the contractor may end an engagement with 14 days written notice.
+
+Laboratory Equipment
+
+The cryogenic test chamber in Building 4 operates at 77 kelvin and must be inspected by a certified engineer every six months.

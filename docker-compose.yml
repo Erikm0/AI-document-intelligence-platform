@@ -1,0 +1,121 @@
+# DocIntel - full local stack.
+#
+#   cp .env.example .env
+#   docker compose up -d --build
+#   open http://localhost:3000
+#
+# First start pulls the LLM (~2 GB for llama3.2:3b) via the one-shot `ollama-init`
+# service; follow progress with `docker compose logs -f ollama-init`.
+# NVIDIA GPU: docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+
+name: docintel
+
+x-restart: &restart
+  restart: unless-stopped
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    <<: *restart
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-docintel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-docintel}
+      POSTGRES_DB: ${POSTGRES_DB:-docintel}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-docintel} -d ${POSTGRES_DB:-docintel}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  chroma:
+    image: chromadb/chroma:1.5.9  # keep in lock-step with the chromadb client version
+    <<: *restart
+    environment:
+      ANONYMIZED_TELEMETRY: "FALSE"
+    volumes:
+      - chroma-data:/data
+
+  ollama:
+    image: ollama/ollama:0.40.16
+    <<: *restart
+    environment:
+      OLLAMA_KEEP_ALIVE: ${OLLAMA_KEEP_ALIVE:-30m}
+    volumes:
+      - ollama-models:/root/.ollama
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  # One-shot job: download the configured model into the shared volume.
+  ollama-init:
+    image: ollama/ollama:0.40.16
+    restart: "no"
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["/bin/sh", "-c", "ollama pull ${OLLAMA_MODEL:-llama3.2:3b}"]
+
+  backend:
+    build:
+      context: ./backend
+      args:
+        PRELOAD_MODELS: ${PRELOAD_MODELS:-true}
+        EMBEDDING_MODEL: ${EMBEDDING_MODEL:-BAAI/bge-small-en-v1.5}
+        RERANKER_MODEL: ${RERANKER_MODEL:-cross-encoder/ms-marco-MiniLM-L-6-v2}
+    image: docintel-backend:latest
+    <<: *restart
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      ENVIRONMENT: production
+      LOG_JSON: ${LOG_JSON:-true}
+      # In-container paths always win over the (local-dev) values in .env
+      UPLOAD_DIR: /data/uploads
+      AUTO_CREATE_SCHEMA: "false"
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-docintel}:${POSTGRES_PASSWORD:-docintel}@postgres:5432/${POSTGRES_DB:-docintel}
+      VECTOR_STORE: chroma-http
+      CHROMA_HOST: chroma
+      CHROMA_PORT: "8000"
+      # Separate variable: OLLAMA_BASE_URL in .env is the local-dev (localhost) value.
+      OLLAMA_BASE_URL: ${DOCKER_OLLAMA_BASE_URL:-http://ollama:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2:3b}
+      OLLAMA_THINK: ${OLLAMA_THINK:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # host Ollama on Linux (built in on Docker Desktop)
+    volumes:
+      - uploads:/data/uploads
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      chroma:
+        condition: service_started
+      ollama:
+        condition: service_started
+        required: false  # allows `DOCKER_OLLAMA_BASE_URL=http://host.docker.internal:11434`
+
+  frontend:
+    build: ./frontend
+    image: docintel-frontend:latest
+    <<: *restart
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    depends_on:
+      backend:
+        condition: service_started
+
+volumes:
+  pgdata:
+  chroma-data:
+  ollama-models:
+  uploads:

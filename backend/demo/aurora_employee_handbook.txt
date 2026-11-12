@@ -1,0 +1,36 @@
+Aurora Robotics Employee Handbook
+=================================
+
+1. Remote Work Policy
+
+Aurora Robotics supports hybrid working. Employees may work remotely for up to three days per week, provided their manager has approved a hybrid working agreement.
+
+All staff must be reachable during the core collaboration hours of 10:00 to 15:00 Central European Time, regardless of where they work.
+
+Working from another country is allowed for a maximum of 20 working days per calendar year and requires prior approval from the People Operations team.
+
+2. Annual Leave
+
+Full-time employees receive 26 days of paid annual leave per calendar year, in addition to public holidays.
+
+Up to five unused leave days may be carried over into the first quarter of the following year; any remaining days expire on 31 March.
+3. Parental Leave
+
+Every new parent, regardless of gender, is entitled to 18 weeks of fully paid parental leave, which can be taken within the first 12 months after the birth or adoption of a child.
+
+Employees returning from parental leave may work a reduced schedule of 80 percent for up to three months at full pay.
+
+4. Travel and Expenses
+
+Meal expenses during business travel are reimbursed up to 45 euros per day. Alcoholic beverages are never reimbursable.
+
+Expense claims must be submitted through the Ledgerly portal within 30 days of the expense and are approved by the employee's direct manager.
+
+Economy class is mandatory for flights shorter than six hours; business class may be booked for longer flights with director approval.
+5. Information Security
+
+Multi-factor authentication is mandatory for every company account. Laptops must use full-disk encryption and lock automatically after five minutes of inactivity.
+
+Suspected security incidents, including lost devices and phishing emails, must be reported to the security team at security@aurora-robotics.example within four hours of discovery.
+
+Production customer data may only be accessed from managed devices connected through the corporate VPN.
